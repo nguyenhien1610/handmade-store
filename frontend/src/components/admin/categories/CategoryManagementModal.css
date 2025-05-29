@@ -1,0 +1,482 @@
+/* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Biến CSS */
+        :root {
+            --primary-pink: #ffc0cb;
+            --light-pink: #ffe6e8;
+            --dark-pink: #ff9aa2;
+            --white: #ffffff;
+            --light-gray: #f9f9f9;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+            --success-color: #4CAF50;
+            --warning-color: #ff9800;
+            --danger-color: #f44336;
+            --info-color: #2196F3;
+        }
+        
+        body {
+            background-color: var(--light-gray); /* Để dễ nhìn modal hơn khi preview */
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Modal Styles (Lấy từ file gốc và điều chỉnh) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1100;
+            display: flex; /* Hiển thị mặc định */
+            align-items: center;
+            justify-content: center;
+            padding: 20px; /* Thêm padding để modal không chạm viền trên mobile */
+        }
+        
+        .modal {
+            background-color: var(--white);
+            border-radius: 10px;
+            width: 100%;
+            max-width: 700px; /* Tăng max-width cho modal danh mục */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: modalFadeIn 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            background-color: var(--light-pink);
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .close-modal-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+        
+        .modal-body {
+            padding: 20px;
+            max-height: calc(80vh - 120px); /* Giới hạn chiều cao, 120px cho header+footer */
+            overflow-y: auto;
+        }
+        
+        .form-grid { /* Lấy từ file gốc */
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-group { /* Lấy từ file gốc */
+            margin-bottom: 20px;
+        }
+        
+        .form-group.full-width { /* Lấy từ file gốc */
+            grid-column: span 2;
+        }
+        
+        .form-label { /* Lấy từ file gốc */
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .form-input, /* Lấy từ file gốc */
+        .form-select, /* Lấy từ file gốc */
+        .form-textarea { /* Lấy từ file gốc */
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-textarea {
+             min-height: 80px; /* Giảm min-height cho textarea trong modal */
+        }
+        
+        .modal-footer {
+            padding: 20px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            background-color: var(--white); /* Đảm bảo footer có nền */
+        }
+        
+        .modal-btn { /* Lấy từ file gốc */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        
+        .cancel-btn { /* Lấy từ file gốc */
+            background-color: var(--light-gray);
+            color: var(--text-color);
+        }
+        
+        .cancel-btn:hover { /* Lấy từ file gốc */
+            background-color: #e0e0e0;
+        }
+        
+        .save-btn { /* Lấy từ file gốc */
+            background-color: var(--success-color);
+            color: var(--white);
+        }
+        
+        .save-btn:hover { /* Lấy từ file gốc */
+            background-color: #3d8b40;
+        }
+
+        /* Category Management Specific Styles */
+        .add-category-form {
+            display: flex;
+            flex-wrap: wrap; /* Cho phép wrap trên mobile */
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: flex-start; /* Căn các item ở đầu */
+        }
+
+        .add-category-input {
+            flex: 1 1 200px; /* Cho phép co giãn và đặt kích thước cơ bản */
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .add-category-btn {
+            background-color: var(--success-color);
+            color: var(--white);
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            height: 40px; /* Đồng bộ chiều cao */
+        }
+        .add-category-btn:hover {
+            background-color: #3d8b40;
+        }
+
+        .categories-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+        }
+
+        .category-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap; /* Cho phép wrap trên mobile */
+            gap: 10px; /* Khoảng cách khi wrap */
+        }
+
+        .category-item:last-child {
+            border-bottom: none;
+        }
+
+        .category-info {
+            flex-grow: 1;
+            min-width: 200px; /* Đảm bảo không quá hẹp */
+        }
+
+        .category-name {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        .category-description {
+            font-size: 0.85em;
+            color: #666;
+            margin-top: 3px;
+            display: block;
+        }
+
+        .category-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-shrink: 0; /* Ngăn co lại */
+        }
+
+        .category-count {
+            font-size: 13px;
+            color: #555;
+            background-color: var(--light-pink);
+            padding: 3px 8px;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+
+        .category-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .category-btn {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .edit-btn { /* Lấy từ file gốc */
+            background-color: rgba(33, 150, 243, 0.1);
+            color: var(--info-color);
+        }
+        .edit-btn:hover { /* Lấy từ file gốc */
+            background-color: rgba(33, 150, 243, 0.2);
+        }
+        .delete-btn { /* Lấy từ file gốc */
+            background-color: rgba(244, 67, 54, 0.1);
+            color: var(--danger-color);
+        }
+        .delete-btn:hover { /* Lấy từ file gốc */
+            background-color: rgba(244, 67, 54, 0.2);
+        }
+
+        /* Sub-modal for editing (nếu bạn dùng) */
+        #editCategoryModal.modal-overlay { /* Style cho modal con */
+             /* display: none;  Sẽ được điều khiển bằng JS */
+             /* Các style khác đã được kế thừa */
+        }
+
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            margin: 20px 0;
+        }
+        h3 {
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Responsive adjustments for modal content */
+        @media (max-width: 600px) {
+            .add-category-form {
+                flex-direction: column;
+            }
+            .add-category-input, .add-category-btn {
+                width: 100%;
+            }
+            .category-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .category-meta {
+                margin-top: 10px;
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+        
+.category-management-modal .modal-body { /* Thêm class để target đúng modal */
+    /* Có thể thêm padding hoặc style riêng nếu cần */
+}
+
+.add-category-form {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: flex-start; 
+}
+
+.add-category-input {
+    flex: 1 1 200px; 
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.add-category-btn {
+    background-color: var(--success-color);
+    color: var(--white);
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 40px; 
+}
+.add-category-btn:hover {
+    background-color: #3d8b40;
+}
+.add-category-btn:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+
+.categories-list {
+    max-height: 300px; /* Hoặc tính toán dựa trên vh */
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+}
+
+.category-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap; 
+    gap: 10px;
+}
+
+.category-item:last-child {
+    border-bottom: none;
+}
+
+.category-info {
+    flex-grow: 1;
+    min-width: 200px;
+}
+
+.category-name {
+    font-weight: 600;
+    color: var(--text-color);
+}
+.category-description {
+    font-size: 0.85em;
+    color: #666;
+    margin-top: 3px;
+    display: block; /* Hoặc inline-block nếu muốn cùng dòng */
+    word-break: break-word; /* Chống tràn text */
+}
+
+.category-meta {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+.category-count {
+    font-size: 13px;
+    color: #555;
+    background-color: var(--light-pink);
+    padding: 3px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+
+.category-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.category-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.category-btn.edit-btn { 
+    background-color: rgba(33, 150, 243, 0.1);
+    color: var(--info-color);
+}
+.category-btn.edit-btn:hover { 
+    background-color: rgba(33, 150, 243, 0.2);
+}
+.category-btn.delete-btn { 
+    background-color: rgba(244, 67, 54, 0.1);
+    color: var(--danger-color);
+}
+.category-btn.delete-btn:hover { 
+    background-color: rgba(244, 67, 54, 0.2);
+}
+.category-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+
+hr { /* Style từ danhmuc.html */
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    margin: 20px 0;
+}
+.category-management-modal h3 { /* Style từ danhmuc.html, target cụ thể hơn */
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Responsive adjustments for modal content */
+@media (max-width: 600px) {
+    .add-category-form {
+        flex-direction: column;
+    }
+    .add-category-input, .add-category-btn {
+        width: 100%;
+    }
+    .category-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .category-meta {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: space-between;
+    }
+}

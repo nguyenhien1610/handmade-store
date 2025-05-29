@@ -1,0 +1,16 @@
+
+  /* frontend/src/assets/css/variables.css */
+:root {
+  --primary-pink: #ffc0cb;
+  --light-pink: #ffe6e8;
+  --dark-pink: #ff9aa2;
+  --white: #ffffff;
+  --light-gray: #f9f9f9;
+  --text-color: #333333;
+  --border-color: #e0e0e0;
+  --success-color: #4CAF50;
+  --warning-color: #ff9800;
+  --danger-color: #f44336;
+  --error-color: #e74c3c;
+  --info-color: #2196F3;
+}

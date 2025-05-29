@@ -1,0 +1,36 @@
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+  font-size: 16px; /* Base font size */
+}
+
+/* Các style toàn cục */
+:root {
+  --primary-pink: #ffc0cb;
+  --light-pink: #ffe6e8;
+  --dark-pink: #ff9aa2;
+  --white: #ffffff;
+  --light-gray: #f9f9f9;
+  --text-color: #333333;
+  --border-color: #e0e0e0;
+  --success-color: #4CAF50;
+  --error-color: #f44336;
+}
+
+body {
+  background-color: var(--light-pink);
+  color: var(--text-color);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Fix cho Font Awesome */
+.fas, .far, .fab, .fa {
+  font-family: 'Font Awesome 5 Free', 'Font Awesome 5 Brands' !important;
+}

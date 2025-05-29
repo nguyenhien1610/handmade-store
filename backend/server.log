@@ -1,0 +1,45 @@
+📁 Đường dẫn database: /home/huyen/handmade-store/backend/data/handmade_store.db
+✅ Đã kết nối CSDL bằng better-sqlite3
+🚀 Đang khởi động server...
+✅ clientAuthRoutes loaded, type: function
+✅ Server đang chạy tại http://localhost:5000
+🔌 WebSocket server is ready
+📋 Cấu trúc bảng Users: [
+  'id_user',  'username',
+  'password', 'email',
+  'hoten',    'diachi',
+  'sdt',      'vaitro',
+  'ngaytao'
+]
+New client connected: zAhQeDqo382tc576AAAB
+New client connected: 4vjR_loaELd8ReoGAAAD
+Login attempt: { username: 'admin', password: 'admin123' }
+Password đầu vào: admin123
+Hash từ mật khẩu đầu vào: 240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9
+Hash đã lưu: 240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9
+Kết quả so sánh: true
+=== ĐĂNG KÝ CLIENT ===
+Data nhận được: {
+  fullName: 'Test User',
+  email: 'test@example.com',
+  phone: '0123456789',
+  password: 'test123'
+}
+=== ĐĂNG KÝ CLIENT ===
+Data nhận được: {
+  fullName: 'New User',
+  email: 'newuser@example.com',
+  phone: '0987654321',
+  password: 'test123'
+}
+=== ĐĂNG KÝ CLIENT ===
+Data nhận được: {
+  fullName: 'New User',
+  email: 'newuser@example.com',
+  phone: '0111222333',
+  password: 'test123'
+}
+✅ Đăng ký thành công, User ID: 4
+=== ĐĂNG NHẬP CLIENT ===
+Data nhận được: { email: 'newuser@example.com', password: 'test123' }
+✅ Đăng nhập thành công: newuser@example.com

@@ -1,0 +1,13 @@
+/* Client Layout Styles */
+.client-layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--light-pink);
+}
+
+.main-content {
+  flex: 1;
+  padding-top: 80px; /* Height of fixed header */
+  width: 100%;
+}

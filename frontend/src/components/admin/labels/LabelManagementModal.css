@@ -1,0 +1,394 @@
+ /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Biến CSS */
+        :root {
+            --primary-pink: #ffc0cb;
+            --light-pink: #ffe6e8;
+            --dark-pink: #ff9aa2;
+            --white: #ffffff;
+            --light-gray: #f9f9f9;
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+            --success-color: #4CAF50;
+            --warning-color: #ff9800;
+            --danger-color: #f44336;
+            --info-color: #2196F3;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1100;
+            display: flex; /* Hiển thị mặc định */
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .modal {
+            background-color: var(--white);
+            border-radius: 10px;
+            width: 100%;
+            max-width: 750px; /* Tăng max-width cho modal nhãn */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            animation: modalFadeIn 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .modal-header {
+            background-color: var(--light-pink);
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .close-modal-btn {
+            background: none; border: none; font-size: 24px; cursor: pointer; color: var(--text-color);
+        }
+        
+        .modal-body {
+            padding: 20px;
+            max-height: calc(80vh - 120px);
+            overflow-y: auto;
+        }
+
+        .form-label { display: block; margin-bottom: 8px; font-weight: 600; font-size: 14px; }
+        .form-input, .form-textarea {
+            width: 100%; padding: 10px; border: 1px solid var(--border-color); border-radius: 5px; font-size: 14px;
+        }
+        .form-textarea { min-height: 80px; }
+        .form-group { margin-bottom: 20px; }
+        
+        .modal-footer {
+            padding: 20px; border-top: 1px solid var(--border-color); display: flex; justify-content: flex-end; gap: 10px; background-color: var(--white);
+        }
+        .modal-btn {
+            padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; transition: all 0.3s;
+        }
+        .cancel-btn { background-color: var(--light-gray); color: var(--text-color); }
+        .cancel-btn:hover { background-color: #e0e0e0; }
+        .save-btn { background-color: var(--success-color); color: var(--white); }
+        .save-btn:hover { background-color: #3d8b40; }
+        
+        /* Label Management Specific Styles */
+        .add-label-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center; /* Căn giữa các item theo chiều dọc */
+        }
+        .add-label-form .form-input {
+            flex: 1 1 180px; /* Cho phép co giãn và đặt kích thước cơ bản */
+        }
+        .add-label-form .color-picker-group {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            border: 1px solid var(--border-color);
+            padding: 0 8px;
+            border-radius: 5px;
+            height: 40px; /* Đồng bộ chiều cao */
+        }
+        .add-label-form .color-picker-group label {
+            margin-bottom: 0;
+            font-size: 13px;
+            white-space: nowrap;
+        }
+        .add-label-form input[type="color"] {
+            padding: 2px;
+            height: 30px;
+            width: 40px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background: none; /* Xóa nền mặc định của input color */
+        }
+        .add-label-btn {
+            background-color: var(--success-color);
+            color: var(--white);
+            border: none;
+            padding: 0 15px; /* Điều chỉnh padding */
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            height: 40px; /* Đồng bộ chiều cao */
+        }
+        .add-label-btn:hover { background-color: #3d8b40; }
+
+        .labels-list {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+        }
+        .label-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .label-item:last-child { border-bottom: none; }
+
+        .label-info { flex-grow: 1; min-width: 250px; }
+        .label-name-display {
+            font-weight: 600;
+            padding: 5px 12px;
+            border-radius: 15px;
+            color: white; /* Sẽ bị ghi đè bởi JS hoặc style cụ thể */
+            display: inline-flex; 
+            align-items: center;
+            /* gap: 6px; /* Giữ hoặc điều chỉnh gap nếu cần khi chỉ có text */
+            font-size: 13px;
+            justify-content: center; /* Căn giữa text khi không có icon */
+        }
+        .label-description { display: block; color: #666; margin-left: 5px; margin-top: 4px; font-size: 0.85em; }
+
+        .label-meta { display: flex; align-items: center; gap: 15px; flex-shrink: 0; }
+        .label-count {
+            font-size: 13px;
+            color: #555;
+            background-color: var(--light-pink);
+            padding: 3px 8px;
+            border-radius: 10px;
+            white-space: nowrap;
+        }
+        .label-actions { display: flex; gap: 8px; }
+        
+        .category-btn { /* Tái sử dụng từ style danh mục */
+            width: 30px; height: 30px; border-radius: 5px; display: flex; align-items: center; justify-content: center; border: none; cursor: pointer; transition: all 0.3s;
+        }
+        .edit-btn { background-color: rgba(33, 150, 243, 0.1); color: var(--info-color); }
+        .edit-btn:hover { background-color: rgba(33, 150, 243, 0.2); }
+        .delete-btn { background-color: rgba(244, 67, 54, 0.1); color: var(--danger-color); }
+        .delete-btn:hover { background-color: rgba(244, 67, 54, 0.2); }
+        
+        hr { border: 0; border-top: 1px solid var(--border-color); margin: 20px 0; }
+        h3 { margin-bottom: 15px; font-size: 16px; font-weight: 600; }
+
+        /* Sub-modal for editing */
+        #editLabelModal.modal-overlay { /* display: none; */ }
+        #editLabelColorInput {
+            padding: 5px; height: 40px; cursor: pointer; width: 100%;
+        }
+         @media (max-width: 700px) {
+            .add-label-form {
+                flex-direction: column;
+                align-items: stretch; /* Kéo dài các item */
+            }
+            .add-label-form .form-input, 
+            .add-label-form .color-picker-group,
+            .add-label-btn {
+                width: 100%;
+            }
+             .add-label-form .color-picker-group {
+                justify-content: space-between; /* Căn chỉnh label và input color */
+            }
+            .label-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .label-meta {
+                margin-top: 10px;
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+        .label-management-modal .modal-body {
+    /* Style riêng nếu cần */
+}
+
+.add-label-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    align-items: center; 
+}
+.add-label-form .form-input {
+    flex: 1 1 180px; 
+}
+.add-label-form .color-picker-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid var(--border-color);
+    padding: 0 8px;
+    border-radius: 5px;
+    height: 40px; 
+}
+.add-label-form .color-picker-group label {
+    margin-bottom: 0;
+    font-size: 13px;
+    white-space: nowrap;
+}
+.add-label-form input[type="color"] {
+    padding: 2px;
+    height: 30px;
+    width: 40px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background: none; 
+}
+.add-label-btn {
+    background-color: var(--success-color);
+    color: var(--white);
+    border: none;
+    padding: 0 15px; 
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 40px; 
+}
+.add-label-btn:hover { background-color: #3d8b40; }
+.add-label-btn:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+}
+
+.labels-list {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+}
+.label-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.label-item:last-child { border-bottom: none; }
+
+.label-info { flex-grow: 1; min-width: 200px; /* Điều chỉnh nếu cần */ }
+.label-name-display {
+    font-weight: 600;
+    padding: 5px 12px;
+    border-radius: 15px; /* Hoặc 5px nếu muốn giống các badge khác */
+    color: white; 
+    display: inline-flex; 
+    align-items: center;
+    font-size: 13px;
+    justify-content: center;
+    text-shadow: 0 0 2px rgba(0,0,0,0.3); /* Thêm shadow cho chữ dễ đọc hơn trên một số màu */
+}
+.label-description { 
+    display: block; 
+    color: #666; 
+    margin-left: 0; /* Không cần margin nếu tên nhãn và mô tả riêng dòng */
+    margin-top: 4px; 
+    font-size: 0.85em; 
+    word-break: break-word;
+}
+
+.label-meta { display: flex; align-items: center; gap: 15px; flex-shrink: 0; }
+.label-count {
+    font-size: 13px;
+    color: #555;
+    background-color: var(--light-pink);
+    padding: 3px 8px;
+    border-radius: 10px;
+    white-space: nowrap;
+}
+.label-actions { display: flex; gap: 8px; }
+
+/* Tái sử dụng class .category-btn từ style danh mục hoặc định nghĩa lại .label-btn */
+.category-btn { 
+    width: 30px; height: 30px; border-radius: 5px; display: flex; 
+    align-items: center; justify-content: center; border: none; 
+    cursor: pointer; transition: all 0.3s;
+}
+.category-btn.edit-btn { background-color: rgba(33, 150, 243, 0.1); color: var(--info-color); }
+.category-btn.edit-btn:hover { background-color: rgba(33, 150, 243, 0.2); }
+.category-btn.delete-btn { background-color: rgba(244, 67, 54, 0.1); color: var(--danger-color); }
+.category-btn.delete-btn:hover { background-color: rgba(244, 67, 54, 0.2); }
+.category-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.label-management-modal hr { 
+    border: 0; border-top: 1px solid var(--border-color); margin: 20px 0; 
+}
+.label-management-modal h3 { 
+    margin-bottom: 15px; font-size: 16px; font-weight: 600; 
+}
+
+/* Style cho input color trong modal sửa nhãn */
+#editLabelColorInputModal { /* ID của input color trong modal sửa */
+    padding: 5px; 
+    height: 40px; /* Đồng bộ chiều cao với các input khác */
+    cursor: pointer; 
+    width: 100%; /* Chiếm toàn bộ chiều rộng của form-group */
+    border: 1px solid var(--border-color); /* Thêm viền để giống các input khác */
+    border-radius: 5px;
+}
+
+@media (max-width: 700px) {
+    .add-label-form {
+        flex-direction: column;
+        align-items: stretch; 
+    }
+    .add-label-form .form-input, 
+    .add-label-form .color-picker-group,
+    .add-label-btn {
+        width: 100%;
+    }
+    .add-label-form .color-picker-group {
+        justify-content: space-between; 
+    }
+    .label-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .label-meta {
+        margin-top: 10px;
+        width: 100%;
+        justify-content: space-between;
+    }
+}

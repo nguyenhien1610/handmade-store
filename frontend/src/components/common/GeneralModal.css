@@ -1,0 +1,65 @@
+/* src/components/common/GeneralModal.css */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none; 
+    align-items: center; justify-content: center;
+    z-index: 1050; padding: 15px;
+}
+.modal-overlay.active {
+    display: flex; animation: fadeInOverlayGeneral 0.2s ease-out; /* Nhanh hơn chút */
+}
+@keyframes fadeInOverlayGeneral { from { opacity: 0; } to { opacity: 1; } }
+
+.modal {
+    background-color: white; /* Hoặc var(--white) nếu biến CSS được định nghĩa toàn cục */
+    border-radius: 8px; /* Giảm bo góc một chút */
+    width: 100%;
+    max-height: 90vh; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow nhẹ nhàng hơn */
+    display: flex; flex-direction: column;
+    animation: slideInModalGeneral 0.25s ease-out; /* Nhanh hơn chút */
+    overflow: hidden;
+}
+@keyframes slideInModalGeneral { 
+    from { opacity: 0; transform: translateY(-20px) scale(0.98); } 
+    to { opacity: 1; transform: translateY(0) scale(1); } 
+}
+
+.modal-header {
+    padding: 12px 20px; /* Điều chỉnh padding */
+    border-bottom: 1px solid #e0e0e0; /* var(--border-color) */
+    display: flex; justify-content: space-between; align-items: center;
+    flex-shrink: 0; 
+    /* background-color: #ffe6e8; Bỏ màu nền header mặc định, để component con quyết định nếu cần */
+}
+.modal-title { 
+    font-size: 1.1rem; /* 17-18px */
+    font-weight: 600; 
+    color: #333333; /* var(--text-color) */
+}
+.modal-close {
+    background: none; border: none; font-size: 24px; cursor: pointer;
+    color: #888; /* Màu icon X nhẹ hơn */
+    padding: 5px; line-height: 1; transition: color 0.2s;
+}
+.modal-close:hover { color: #f44336; /* var(--danger-color) */ }
+
+.modal-body { 
+    padding: 20px; 
+    overflow-y: auto; 
+    flex-grow: 1; 
+}
+.modal-body::-webkit-scrollbar { width: 6px; }
+.modal-body::-webkit-scrollbar-thumb { background-color: #ccc; border-radius: 3px; } /* Màu thumb scrollbar */
+.modal-body::-webkit-scrollbar-track { background-color: #f1f1f1; } /* Màu track scrollbar */
+
+.modal-footer {
+    padding: 12px 20px; /* Điều chỉnh padding */
+    border-top: 1px solid #e0e0e0;
+    display: flex; justify-content: flex-end; gap: 10px;
+    flex-shrink: 0; background-color: #f9f9f9; 
+}
+/* Các nút trong footer (ví dụ: .modal-btn, .modal-btn-cancel, .modal-btn-save) 
+   sẽ được style bởi component truyền footerContent vào, hoặc bạn có thể định nghĩa style chung ở đây.
+*/

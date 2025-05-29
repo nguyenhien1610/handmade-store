@@ -1,0 +1,107 @@
+/* frontend/src/components/admin/Header.css */
+.admin-header {
+  background-color: var(--white);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  left: 0;
+  height: 70px;
+}
+
+.admin-nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.admin-logo {
+  font-size: 28px;
+  font-weight: bold;
+  color: var(--dark-pink);
+}
+
+.admin-logo span {
+  color: var(--text-color);
+}
+
+.admin-header .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.admin-header .user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 20px;
+  margin-bottom: 0;
+}
+
+.admin-header .user-info span {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.admin-header .user-avatar {
+  width: 40px;
+  height: 40px;
+  background-color: var(--primary-pink);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 18px;
+  margin-bottom: 0;
+}
+
+.admin-header .user-avatar i {
+  font-size: 18px !important;
+  line-height: 1;
+}
+
+.admin-header .logout-btn {
+  background-color: var(--dark-pink);
+  color: var(--white);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.admin-header .logout-btn:hover {
+  background-color: #ff8a94;
+}
+
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+@media (max-width: 1024px) {
+  .mobile-menu-btn {
+    display: block;
+  }
+  
+  .admin-nav-container {
+    padding: 15px 30px;
+  }
+}

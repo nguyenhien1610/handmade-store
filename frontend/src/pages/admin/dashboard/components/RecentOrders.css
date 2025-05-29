@@ -1,0 +1,58 @@
+/* src/pages/admin/dashboard/components/RecentOrders.css */
+.recent-orders-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .recent-orders-table th,
+  .recent-orders-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .recent-orders-table th {
+    font-weight: 600;
+    color: #333;
+    background-color: #f9f9f9;
+  }
+  
+  .recent-orders-table tbody tr:hover {
+    background-color: #ffe6e8;
+  }
+  
+  /* Status Badges */
+  .status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    min-width: 100px;
+  }
+  
+  .status-pending {
+    background-color: rgba(255, 152, 0, 0.1);
+    color: #ff9800;
+  }
+  
+  .status-confirmed {
+    background-color: rgba(33, 150, 243, 0.1);
+    color: #2196F3;
+  }
+  
+  .status-shipping {
+    background-color: rgba(156, 39, 176, 0.1);
+    color: #9c27b0;
+  }
+  
+  .status-completed {
+    background-color: rgba(76, 175, 80, 0.1);
+    color: #4CAF50;
+  }
+  
+  .status-cancelled {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: #f44336;
+  }

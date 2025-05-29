@@ -1,0 +1,347 @@
+/* Các biến CSS :root nên được đặt ở file CSS toàn cục (vd: src/index.css hoặc src/App.css) */
+
+/* Hero Section */
+.hero {
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--text-color);
+    position: relative;
+    overflow: hidden; 
+    padding: 40px 20px;
+}
+
+.heroOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 230, 232, 0.3);
+    z-index: 1;
+}
+
+.heroContent {
+    max-width: 800px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2; 
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    font-weight: 700; 
+    color: var(--dark-pink);
+    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.7);
+}
+
+.animatedGradientText {
+    background: linear-gradient(130deg, 
+                                var(--dark-pink),      
+                                var(--pastel-purple),  
+                                var(--primary-pink),   
+                                var(--deeper-pink-accent), 
+                                var(--pastel-purple),
+                                var(--dark-pink)       
+                            );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    font-weight: 800;
+    animation: shimmerTextGradient 6s ease-in-out infinite alternate;
+    display: inline-block;
+}
+
+@keyframes shimmerTextGradient {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--text-color);
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.btn {
+    display: inline-block;
+    background-color: var(--dark-pink);
+    color: white;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.btn:hover {
+    background-color: var(--deeper-pink-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* Section Title chung */
+.sectionTitle {
+    font-size: 32px;
+    margin-bottom: 50px;
+    color: var(--text-color);
+    text-align: center;
+    position: relative;
+}
+
+.sectionTitle::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    background-color: var(--primary-pink);
+    margin: 15px auto 0;
+}
+
+/* Products Section */
+.productsByCategorySection {
+    padding: 60px 5%;
+    background-color: var(--white); 
+}
+
+.categoryShowcaseSection {
+    /* No specific styles needed here if parent handles padding */
+}
+
+.categoryBlock {
+    background-color: var(--white);
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 40px;
+    border: 1px solid var(--extra-light-pink);
+}
+
+.categoryBlock:last-child {
+    margin-bottom: 0;
+}
+
+.categoryTitleHeader {
+    font-size: 24px;
+    color: var(--dark-pink);
+    margin-bottom: 25px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--light-pink);
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Để đẩy mũi tên sang phải */
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.categoryTitleHeader:hover {
+    color: var(--deeper-pink-accent);
+}
+
+.categoryTitleHeader span { /* Bọc text tiêu đề trong span */
+    flex-grow: 1;
+}
+
+/* --- CSS cho SVG mũi tên NẾU bạn vẫn dùng SVG cho IconArrowRight --- */
+.categoryTitleHeader svg { 
+    width: 12px; /* Kích thước mũi tên */
+    height: 12px;
+    fill: currentColor; /* Mũi tên sẽ có màu giống text tiêu đề */
+    transition: transform 0.3s ease;
+    /* margin-left: 10px; Bỏ nếu dùng justify-content: space-between */
+}
+/* Nếu bạn làm chức năng xoay mũi tên khi mở rộng:
+.categoryTitleHeader.expanded svg {
+    transform: rotate(90deg);
+}
+*/
+/* --- Kết thúc CSS cho SVG mũi tên --- */
+
+
+/* Nếu bạn sử dụng ký tự Unicode/Emoji cho các icon nút bấm (chat, back-to-top), 
+   thì các class .chatButton svg, .chatSendBtn svg, .chatboxToggle svg, .backToTop svg 
+   và các style display:flex cho các nút đó có thể không cần thiết nữa, 
+   trừ khi bạn muốn căn chỉnh ký tự đó một cách đặc biệt. */
+
+.productContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 25px;
+}
+
+.productCard {
+    background-color: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid var(--light-pink); 
+    display: flex;
+    flex-direction: column;
+}
+
+.productCard:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.productImg {
+    height: 230px;
+    background-color: var(--extra-light-pink); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px; /* Cho emoji sản phẩm */
+    color: var(--primary-pink);
+    position: relative;
+}
+
+.productBadges {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    gap: 5px;
+    z-index: 1;
+}
+
+.productBadge {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--white);
+}
+
+.hotBadge {
+    background-color: var(--danger-color);
+}
+
+.productInfo {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.productMeta {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.productCategoryTag {
+    background-color: var(--light-pink);
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    color: var(--dark-pink);
+    font-weight: 500;
+}
+
+.productName {
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 10px;
+    flex-grow: 1;
+    color: var(--text-color);
+    line-height: 1.4;
+    min-height: 2.8em;
+}
+
+.productPrice {
+    color: var(--dark-pink);
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.addToCart {
+    background-color: var(--primary-pink);
+    color: var(--text-color);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+    width: 100%;
+    margin-top: auto;
+}
+
+.addToCart:hover {
+    background-color: var(--dark-pink);
+    color: var(--white);
+    transform: scale(1.03);
+}
+
+/* Chatbox Styles */
+.chatbox { position: fixed; bottom: 20px; right: 20px; width: 320px; height: 400px; background-color: #fff; border-radius: 10px; box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2); display: flex; flex-direction: column; overflow: hidden; z-index: 1000; }
+.chatboxHeader { background-color: var(--dark-pink); color: white; padding: 15px; display: flex; justify-content: space-between; align-items: center; }
+.chatboxTitle { font-weight: 600; }
+.chatboxToggle { cursor: pointer; /* Ký tự Unicode sẽ nhận style từ đây */ }
+.chatboxBody { flex: 1; padding: 15px; overflow-y: auto; background-color: #f9f9f9; }
+.chatMessages { display: flex; flex-direction: column; gap: 10px; }
+.message { max-width: 80%; padding: 10px 15px; border-radius: 15px;  position: relative; line-height: 1.4; }
+.messageReceived { background-color: #e9e9eb; color: #333; align-self: flex-start; border-bottom-left-radius: 5px; }
+.messageSent { background-color: var(--primary-pink); color: var(--text-color); align-self: flex-end; border-bottom-right-radius: 5px; }
+.messageContent {} /* Không cần style riêng nếu message đã đủ */
+.messageTime { font-size: 11px; color: #888; margin-top: 5px; text-align: right; }
+.messageReceived .messageTime { text-align: left; }
+.chatboxFooter { padding: 10px 15px; border-top: 1px solid #eee; display: flex; background-color: #fff; }
+.chatInput { flex: 1; border: 1px solid #ddd; border-radius: 20px; padding: 10px 15px; font-size: 14px; outline: none; }
+.chatSendBtn { background-color: var(--dark-pink); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; margin-left: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background-color 0.3s; }
+.chatSendBtn:hover { background-color: var(--deeper-pink-accent); }
+.chatButton { position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px; background-color: var(--dark-pink); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; /* Kích thước cho emoji/ký tự */ cursor: pointer; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); z-index: 999; transition: background-color 0.3s, transform 0.3s; }
+.chatButton:hover { background-color: var(--deeper-pink-accent); transform: scale(1.1); }
+.backToTop { position: fixed; bottom: 90px; right: 20px; width: 45px; height: 45px; background-color: var(--dark-pink); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; /* Kích thước cho ký tự */ cursor: pointer; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); z-index: 998; opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s, transform 0.3s; }
+.backToTop { opacity: 1; visibility: visible; }
+.backToTop:hover { background-color: var(--deeper-pink-accent); transform: scale(1.1); }
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero { min-height: 400px; }
+    .hero h1 { font-size: 32px; }
+    .hero p { font-size: 16px; }
+    .categoryTitleHeader { font-size: 22px; }
+    .sectionTitle { font-size: 28px; }
+    .productContainer { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+}
+
+@media (max-width: 480px) {
+    .hero { padding: 30px 15px; min-height: 350px; }
+    .hero h1 { font-size: 28px; }
+    .hero p { font-size: 15px; margin-bottom: 25px; }
+    .btn { padding: 10px 25px; font-size: 15px; }
+    .sectionTitle { font-size: 24px; margin-bottom: 30px;}
+    .sectionTitle::after { width: 60px; margin-top: 10px; }
+    .categoryTitleHeader { font-size: 20px; margin-bottom: 20px; }
+    .productContainer {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .productImg { height: 200px; }
+    .productName { font-size: 16px; min-height: auto; }
+    .productPrice { font-size: 18px; }
+    .addToCart { padding: 8px 15px; font-size: 14px; }
+
+    .chatbox { width: calc(100% - 30px); right: 15px; bottom: 15px; height: 350px;}
+    .chatButton { width: 50px; height: 50px; font-size: 20px; /* Điều chỉnh nếu emoji quá nhỏ/to */ }
+    .backToTop { width: 40px; height: 40px; font-size: 18px; /* Điều chỉnh nếu ký tự quá nhỏ/to */ bottom: 75px; right: 15px;}
+}

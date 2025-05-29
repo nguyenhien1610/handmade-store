@@ -1,0 +1,288 @@
+/* Reset CSS cho admin login */
+.admin-login-wrapper * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Biến CSS */
+:root {
+    --primary-pink: #ffc0cb;
+    --light-pink: #ffe6e8;
+    --dark-pink: #ff9aa2;
+    --white: #ffffff;
+    --light-gray: #f9f9f9;
+    --text-color: #333333;
+    --border-color: #e0e0e0;
+    --success-color: #4CAF50;
+    --error-color: #f44336;
+}
+
+.admin-login-container {
+    display: flex;
+    width: 900px;
+    height: 550px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: var(--white);
+}
+
+.login-image {
+    flex: 1;
+    background-color: var(--light-pink);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 40px;
+}
+
+.login-image-content {
+    text-align: center;
+    z-index: 2;
+}
+
+.login-image-content h2 {
+    color: var(--dark-pink);
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.login-image-content p {
+    color: var(--text-color);
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.handmade-icon {
+    font-size: 100px;
+    color: var(--dark-pink);
+    margin-bottom: 30px;
+}
+
+.pattern {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.1;
+    background-image: 
+        radial-gradient(var(--dark-pink) 2px, transparent 2px),
+        radial-gradient(var(--dark-pink) 2px, transparent 2px);
+    background-size: 30px 30px;
+    background-position: 0 0, 15px 15px;
+}
+
+.login-form {
+    flex: 1;
+    background-color: var(--white);
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--dark-pink);
+    margin-bottom: 10px;
+}
+
+.logo span {
+    color: var(--text-color);
+}
+
+.login-title {
+    font-size: 24px;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.login-subtitle {
+    font-size: 14px;
+    color: #666;
+}
+
+.input-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+.input-field {
+    position: relative;
+}
+
+.input-field input {
+    width: 100%;
+    padding: 15px 15px 15px 45px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-field input:focus {
+    border-color: var(--dark-pink);
+    box-shadow: 0 0 0 3px rgba(255, 154, 162, 0.2);
+    outline: none;
+}
+
+.input-field i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999;
+}
+
+.input-field input:focus + i {
+    color: var(--dark-pink);
+}
+
+.password-toggle {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+}
+
+.remember-me input {
+    margin-right: 8px;
+    accent-color: var(--dark-pink);
+}
+
+.remember-me label {
+    font-size: 14px;
+    color: #666;
+}
+
+.forgot-password {
+    font-size: 14px;
+    color: var(--dark-pink);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.forgot-password:hover {
+    color: #ff8a94;
+    text-decoration: underline;
+}
+
+.login-btn {
+    background-color: var(--dark-pink);
+    color: var(--white);
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.login-btn:hover {
+    background-color: #ff8a94;
+}
+
+.login-btn:active {
+    transform: translateY(2px);
+}
+
+.login-footer {
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}
+
+.error-message {
+    background-color: rgba(244, 67, 54, 0.1);
+    color: var(--error-color);
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.error-message i {
+    margin-right: 10px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .admin-login-container {
+        flex-direction: column;
+        width: 90%;
+        height: auto;
+    }
+    
+    .login-image {
+        display: none;
+    }
+    
+    .login-form {
+        padding: 40px 30px;
+    }
+}
+
+/* Special class for admin login page body */
+body.admin-login-page-body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* Wrapper cho toàn bộ trang admin login */
+.admin-login-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--light-gray);
+    background-image: radial-gradient(circle at top right, var(--light-pink) 0%, transparent 60%), 
+                      radial-gradient(circle at bottom left, var(--light-pink) 0%, transparent 60%);
+    background-size: cover;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}

@@ -1,0 +1,220 @@
+/* frontend/src/components/products/ProductCard.css */
+
+/* Biến CSS (nếu bạn muốn định nghĩa lại hoặc sử dụng từ App.css) 
+   Nếu bạn đã có các biến này trong App.css và App.css được import ở App.js, 
+   thì các component con thường sẽ kế thừa được.
+   Tuy nhiên, để ProductCard độc lập hơn, bạn có thể định nghĩa lại các biến cần thiết ở đây
+   hoặc đảm bảo App.css được áp dụng toàn cục.
+*/
+:root {
+    --primary-pink: #ffc0cb;
+    --light-pink: #ffe6e8;
+    --dark-pink: #ff9aa2;
+    --white: #ffffff;
+    --light-gray: #f9f9f9;
+    --text-color: #333333;
+    --border-color: #e0e0e0;
+    --success-color: #4CAF50;
+    --warning-color: #ff9800;
+    --danger-color: #f44336;
+    --info-color: #2196F3;
+}
+
+.product-card {
+    background-color: var(--white);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    position: relative;
+    transition: transform 0.3s, box-shadow 0.3s; /* Thêm hiệu ứng cho box-shadow */
+    display: flex; /* Giúp các phần tử bên trong sắp xếp tốt hơn */
+    flex-direction: column; /* Các phần tử con xếp chồng lên nhau */
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Tăng box-shadow khi hover */
+}
+
+.product-image {
+    height: 200px; /* Hoặc aspect-ratio: 3 / 2; để linh hoạt hơn */
+    background-color: var(--light-pink); /* Màu nền placeholder */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden; /* Đảm bảo ảnh không tràn ra ngoài */
+}
+
+.product-image img { /* Style cho ảnh thật khi được load */
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Đảm bảo ảnh phủ kín mà không bị méo */
+    transition: transform 0.3s ease; /* Hiệu ứng zoom nhẹ khi hover card */
+}
+
+.product-card:hover .product-image img {
+    transform: scale(1.05); /* Zoom nhẹ ảnh khi hover card */
+}
+
+.product-image > i.fas.fa-image { /* Icon placeholder khi chưa có ảnh */
+    font-size: 60px;
+    color: var(--dark-pink);
+}
+
+.product-badges {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    gap: 5px;
+    z-index: 2; /* Đảm bảo badge nổi lên trên ảnh */
+}
+
+.product-badge {
+    padding: 4px 8px; /* Giảm padding một chút */
+    border-radius: 5px;
+    font-size: 11px; /* Giảm font size */
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--white); /* Màu chữ mặc định cho badge */
+    line-height: 1.4; /* Cải thiện hiển thị chữ */
+}
+
+.hot-badge {
+    background-color: var(--danger-color);
+}
+
+.custom-badge { /* Ví dụ từ HTML gốc, bạn có thể đổi tên này */
+    background-color: var(--info-color);
+}
+/* Thêm class cho nhãn chính (nếu bạn muốn style riêng cho nó từ ProductCard.js) */
+.primary-label-badge {
+    /* background-color: var(--info-color);  Màu sẽ được set inline từ JS */
+}
+
+
+.out-of-stock-badge {
+    background-color: #777; /* Màu xám cho hết hàng */
+}
+
+.product-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    flex-direction: column; /* Các nút xếp chồng lên nhau */
+    gap: 8px; /* Giảm khoảng cách */
+    z-index: 2;
+    opacity: 0; /* Ẩn ban đầu */
+    transition: opacity 0.3s ease;
+}
+
+.product-card:hover .product-actions {
+    opacity: 1; /* Hiện ra khi hover vào card */
+}
+
+.product-action-btn {
+    width: 32px; /* Giảm kích thước nút */
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.9); /* Nền trắng mờ */
+    color: var(--text-color);
+    border: 1px solid var(--border-color); /* Thêm viền nhẹ */
+    cursor: pointer;
+    transition: all 0.2s ease; /* Giảm thời gian transition */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.product-action-btn:hover {
+    background-color: var(--dark-pink);
+    color: var(--white);
+    border-color: var(--dark-pink);
+    transform: scale(1.1); /* Hiệu ứng phóng to nhẹ */
+}
+
+.product-action-btn i {
+    font-size: 0.9em; /* Điều chỉnh kích thước icon nếu cần */
+}
+
+.product-info {
+    padding: 15px;
+    flex-grow: 1; /* Giúp phần info chiếm không gian còn lại nếu card có chiều cao cố định */
+    display: flex;
+    flex-direction: column;
+}
+
+.product-name {
+    font-weight: 600;
+    font-size: 1.1rem; /* Tăng nhẹ font-size */
+    margin-bottom: 8px;
+    color: var(--text-color);
+    line-height: 1.3;
+    /* Giới hạn tên sản phẩm thành 2 dòng */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: calc(1.3em * 2); /* Đảm bảo không gian cho 2 dòng tên */
+}
+
+.product-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.product-category {
+    background-color: var(--light-pink);
+    padding: 3px 8px;
+    border-radius: 12px; /* Bo tròn hơn */
+    font-size: 11px;
+    color: var(--dark-pink);
+    font-weight: 500;
+}
+
+.product-id {
+    font-size: 12px;
+    color: #777; /* Màu xám hơn */
+}
+
+.product-description {
+    color: #555; /* Màu chữ đậm hơn một chút */
+    font-size: 0.875rem; /* 14px */
+    margin-bottom: 15px;
+    line-height: 1.5;
+    /* Giới hạn mô tả thành 3 dòng */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Số dòng hiển thị */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-grow: 1; /* Cho phép mô tả co giãn để đẩy phần details xuống dưới */
+    min-height: calc(1.5em * 3); /* Đảm bảo không gian cho 3 dòng mô tả */
+}
+
+.product-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+    margin-top: auto; /* Đẩy phần này xuống cuối cùng của .product-info */
+}
+
+.product-price {
+    font-weight: 700; /* Đậm hơn */
+    color: var(--dark-pink);
+    font-size: 1.15rem; /* 18px hoặc lớn hơn một chút */
+}
+
+.product-stock {
+    font-size: 0.875rem; /* 14px */
+    color: #555;
+    font-weight: 500;
+}
