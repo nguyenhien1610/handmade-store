@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Đơn Hàng - HandmadeStore</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Biến CSS */
+        :root {
+            --primary-pink: #ffc0cb;
+            --light-pink: #ffe6e8;
+            --dark-pink: #ff9aa2;
+            --white: #ffffff;
+            --light-gray: #f9f9f9;
+            --medium-gray: #e0e0e0;
+            --text-color: #333333;
+            --success-color: #4CAF50;
+            --warning-color: #ff9800;
+            --danger-color: #f44336;
+            --info-color: #2196F3;
+        }
+        
+        body {
+            background-color: var(--light-gray);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--dark-pink);
+        }
+        
+        .logo span {
+            color: var(--text-color);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 30px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 18px;
+            transition: color 0.3s;
+            padding: 8px 12px;
+            border-radius: 5px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--dark-pink);
+            background-color: var(--light-pink);
+        }
+        
+        .user-account {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-icon {
+            font-size: 24px;
+            margin-right: 10px;
+            color: var(--dark-pink);
+        }
+        
+        .cart-icon {
+            font-size: 24px;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+        
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 120px auto 60px;
+            padding: 0 20px;
+        }
+        
+        .page-title {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: var(--text-color);
+            position: relative;
+        }
+        
+        .page-title::after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-pink);
+            margin-top: 15px;
+        }
+        
+        /* Tab navigation */
+        .tab-nav {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        
+        .tab-button {
+            padding: 12px 25px;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+        
+        .tab-button.active {
+            color: var(--dark-pink);
+        }
+        
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--dark-pink);
+        }
+        
+        .tab-button:hover {
+            color: var(--dark-pink);
+        }
+        
+        /* Order list */
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .order-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .order-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .order-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: var(--light-pink);
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        
+        .order-id {
+            font-weight: 600;
+            font-size: 18px;
+        }
+        
+        .order-date {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .order-summary {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+        
+        .order-products {
+            flex: 2;
+        }
+        
+        .product-preview {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .product-emoji {
+            width: 50px;
+            height: 50px;
+            background-color: var(--light-pink);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 15px;
+        }
+        
+        .product-details {
+            flex: 1;
+        }
+        
+        .product-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .product-count {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .view-more {
+            color: var(--dark-pink);
+            cursor: pointer;
+            margin-top: 5px;
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .view-more:hover {
+            text-decoration: underline;
+        }
+        
+        .order-info {
+            flex: 1;
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .order-status {
+            margin-bottom: 15px;
+        }
+        
+        .status-badge {
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+            display: inline-block;
+        }
+        
+        .status-processing {
+            background-color: var(--info-color);
+        }
+        
+        .status-shipping {
+            background-color: var(--warning-color);
+        }
+        
+        .status-delivered {
+            background-color: var(--success-color);
+        }
+        
+        .status-cancelled {
+            background-color: var(--danger-color);
+        }
+        
+        .delivery-date {
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+        
+        .expected-date {
+            font-weight: 600;
+            color: var(--dark-pink);
+        }
+        
+        .total-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--dark-pink);
+            margin-bottom: 15px;
+        }
+        
+        .order-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        .btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            border: none;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--dark-pink);
+            color: var(--dark-pink);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--light-pink);
+        }
+        
+        .btn-danger {
+            background-color: var(--danger-color);
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background-color: #d32f2f;
+        }
+        
+        .btn-detail {
+            background-color: var(--dark-pink);
+            color: white;
+        }
+        
+        .btn-detail:hover {
+            background-color: #ff8a94;
+        }
+        
+        /* Order detail modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background-color: var(--white);
+            width: 90%;
+            max-width: 800px;
+            margin: 80px auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+            animation: slideIn 0.3s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        
+        .modal-title {
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .close-modal {
+            font-size: 28px;
+            cursor: pointer;
+            color: #777;
+            transition: color 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: var(--danger-color);
+        }
+        
+        .modal-body {
+            padding: 20px;
+        }
+        
+        .order-detail-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        
+        .order-detail-status {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+        
+        .order-detail-info p {
+            margin-bottom: 8px;
+        }
+        
+        .order-progress {
+            margin: 30px 0;
+        }
+        
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+        
+        .progress-steps::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--medium-gray);
+            z-index: 1;
+        }
+        
+        .progress-step {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            width: 25%;
+        }
+        
+        .step-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: var(--medium-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .step-text {
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        .progress-step.completed .step-icon {
+            background-color: var(--success-color);
+        }
+        
+        .progress-step.active .step-icon {
+            background-color: var(--dark-pink);
+        }
+        
+        .progress-steps .completed:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            width: 100%;
+            height: 3px;
+            background-color: var(--success-color);
+            z-index: 1;
+        }
+        
+        .order-products-list {
+            margin-top: 30px;
+        }
+        
+        .order-products-list h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .product-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--medium-gray);
+        }
+        
+        .product-item:last-child {
+            border-bottom: none;
+        }
+        
+        .product-image {
+            width: 80px;
+            height: 80px;
+            background-color: var(--light-pink);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            margin-right: 20px;
+        }
+        
+        .product-item-details {
+            flex: 1;
+        }
+        
+        .product-item-name {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .product-item-price {
+            color: var(--dark-pink);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .product-item-quantity {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .product-item-subtotal {
+            text-align: right;
+            font-weight: 700;
+            font-size: 18px;
+            min-width: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+        .order-summary-section {
+            margin-top: 30px;
+            background-color: var(--light-gray);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .summary-row:last-child {
+            margin-bottom: 0;
+            padding-top: 15px;
+            border-top: 1px solid var(--medium-gray);
+        }
+        
+        .summary-label {
+            font-weight: 600;
+        }
+        
+        .summary-value {
+            font-weight: 700;
+        }
+        
+        .grand-total {
+            color: var(--dark-pink);
+            font-size: 20px;
+        }
+        
+        .shipping-address {
+            margin-top: 30px;
+        }
+        
+        .shipping-address h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .address-details {
+            background-color: var(--light-gray);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .address-details p {
+            margin-bottom: 8px;
+        }
+        
+        .address-details p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            border-top: 1px solid var(--medium-gray);
+        }
+        
+        .btn-lg {
+            padding: 12px 25px;
+            font-size: 16px;
+        }
+        
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+        }
+        
+        .empty-icon {
+            font-size: 80px;
+            color: var(--medium-gray);
+            margin-bottom: 20px;
+        }
+        
+        .empty-message {
+            font-size: 20px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        /* Confirmation Modal */
+        .confirmation-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 3000;
+        }
+        
+        .confirmation-content {
+            background-color: var(--white);
+            width: 90%;
+            max-width: 500px;
+            margin: 150px auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .confirmation-icon {
+            font-size: 50px;
+            color: var(--danger-color);
+            margin-bottom: 20px;
+        }
+        
+        .confirmation-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .confirmation-message {
+            margin-bottom: 25px;
+            color: #666;
+        }
+        
+        .confirmation-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background-color: var(--white);
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            z-index: 4000;
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .toast-icon {
+            margin-right: 15px;
+            font-size: 24px;
+        }
+        
+        .toast-icon.success {
+            color: var(--success-color);
+        }
+        
+        .toast-message {
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--light-gray);
+            padding: 60px 5% 30px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--dark-pink);
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo span {
+            color: var(--text-color);
+        }
+        
+        .footer-about p {
+            margin-bottom: 20px;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-pink);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--dark-pink);
+        }
+        
+        .footer-links h3, .footer-contact h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--dark-pink);
+        }
+        
+        .contact-info p {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-icon {
+            margin-right: 10px;
+            color: var(--dark-pink);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            nav ul {
+                margin-top: 15px;
+            }
+            
+            nav ul li {
+                margin-left: 15px;
+                margin-right: 15px;
+            }
+            
+            nav ul li a {
+                font-size: 16px;
+                padding: 6px 10px;
+            }
+            
+            .main-content {
+                margin-top: 160px;
+            }
+            
+            .tab-nav {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 5px;
+            }
+            
+            .order-summary {
+                flex-direction: column;
+            }
+            
+            .order-info {
+                margin-top: 20px;
+                text-align: left;
+            }
+            
+            .order-actions {
+                justify-content: flex-start;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 60px auto;
+            }
+            
+            .progress-steps {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .progress-steps::before {
+                display: none;
+            }
+            
+            .progress-step {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                margin-bottom: 15px;
+            }
+            
+            .step-icon {
+                margin: 0 15px 0 0;
+            }
+            
+            .product-item {
+                flex-direction: column;
+            }
+            
+            .product-image {
+                margin-bottom: 15px;
+            }
+            
+            .product-item-subtotal {
+                margin-top: 10px;
+                justify-content: flex-start;
+            }
+            
+            .modal-footer {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .modal-footer button {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 28px;
+            }
+            
+            .tab-button {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+            
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .order-date {
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">Handmade<span>Store</span></div>
+            <nav>
+                <ul>
+                    <li><a href="#">Trang chủ</a></li>
+                    <li><a href="#">Sản phẩm</a></li>
+                    <li><a href="#">Danh mục</a></li>
+                    <li><a href="#">Về chúng tôi</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                </ul>
+            </nav>
+            <div class="user-account">
+                <div class="user-icon"><i class="fas fa-user-circle"></i></div>
+                <div class="username">Nguyễn Văn A</div>
+                <div class="cart-icon"><i class="fas fa-shopping-cart"></i></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1 class="page-title">Đơn hàng của tôi</h1>
+        
+        <!-- Tab Navigation -->
+        <div class="tab-nav">
+            <button class="tab-button active" data-tab="all-orders">Tất cả đơn hàng</button>
+            <button class="tab-button" data-tab="processing-orders">Đang xử lý</button>
+            <button class="tab-button" data-tab="shipping-orders">Đang giao</button>
+            <button class="tab-button" data-tab="delivered-orders">Đã giao</button>
+            <button class="tab-button" data-tab="cancelled-orders">Đã hủy</button>
+        </div>
+        
+        <!-- All Orders Tab -->
+        <div class="tab-content active" id="all-orders">
+            <div class="order-list">
+                <!-- Đơn hàng 1 - Đang chờ xử lý -->
+                <div class="order-card" data-order-id="HD20250518001">
+                    <div class="order-header">
+                        <div class="order-id">Đơn hàng #HD20250518001</div>
+                        <div class="order-date">Đặt ngày: 18/05/2025</div>
+                    </div>
+                    <div class="order-summary">
+                        <div class="order-products">
+                            <div class="product-preview">
+                                <div class="product-emoji">🧸</div>
+                                <div class="product-details">
+                                    <div class="product-name">Gấu bông handmade</div>
+                                    <div class="product-count">x1</div>
+                                </div>
+                            </div>
+                            <div class="product-preview">
+                                <div class="product-emoji">📔</div>
+                                <div class="product-details">
+                                    <div class="product-name">Sổ tay bìa vải handmade</div>
+                                    <div class="product-count">x2</div>
+                                </div>
+                            </div>
+                            <span class="view-more" onclick="openOrderDetail('HD20250518001')">Xem chi tiết</span>
+                        </div>
+                        <div class="order-info">
+                            <div class="order-status">
+                                <span class="status-badge status-processing">Đang xử lý</span>
+                            </div>
+                            <div class="delivery-date">
+                                Ngày nhận dự kiến: <span class="expected-date">22/05/2025</span>
+                            </div>
+                            <div class="total-price">590.000đ</div>
+                            <div class="order-actions">
+                                <button class="btn btn-outline" onclick="openOrderDetail('HD20250518001')">Xem chi tiết</button>
+                                <button class="btn btn-danger" onclick="openCancelConfirmation('HD20250518001')">Hủy đơn</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Đơn hàng 2 - Đang giao -->
+                <div class="order-card" data-order-id="HD20250517002">
+                    <div class="order-header">
+                        <div class="order-id">Đơn hàng #HD20250517002</div>
+                        <div class="order-date">Đặt ngày: 17/05/2025</div>
+                    </div>
+                    <div class="order-summary">
+                        <div class="order-products">
+                            <div class="product-preview">
+                                <div class="product-emoji">🕯️</div>
+                                <div class="product-details">
+                                    <div class="product-name">Nến thơm handmade</div>
+                                    <div class="product-count">x3</div>
+                                </div>
+                            </div>
+                            <span class="view-more" onclick="openOrderDetail('HD20250517002')">Xem chi
